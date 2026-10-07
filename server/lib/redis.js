@@ -12,8 +12,8 @@ function createRedis(url = process.env.REDIS_URL, { log = defaultLog } = {}) {
   const redis = new Redis(url, {
     enableOfflineQueue: false,
     maxRetriesPerRequest: 1,
-    commandTimeout: 500,
-    socketTimeout: 1000,
+    commandTimeout: Number(process.env.REDIS_COMMAND_TIMEOUT) || 3000,
+    socketTimeout: Number(process.env.REDIS_SOCKET_TIMEOUT) || 5000,
     retryStrategy: (attempt) => Math.min(attempt * 200, 5000),
   });
   let down = false;
