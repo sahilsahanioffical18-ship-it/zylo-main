@@ -1,0 +1,161 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Zylo tokens — design-system/zylo/MASTER.md (ui-ux-pro-max "Remote Work/Collaboration Tool" + matching dark palette).
+   Derived values (not in the plugin palette) are marked "derived". */
+:root {
+  --radius: 0.75rem;
+  --background: #f5f3ff;
+  --foreground: #312e81;
+  --card: #ffffff;
+  --card-foreground: #312e81;
+  --popover: #ffffff;
+  --popover-foreground: #312e81;
+  --primary: #6366f1;
+  --primary-foreground: #000000;
+  --secondary: #818cf8;
+  --secondary-foreground: #0f172a;
+  --muted: #ebeff9;
+  --muted-foreground: #475569;
+  --accent: #e0e7ff; /* shadcn hover surface = plugin border tint */
+  --accent-foreground: #312e81;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #e0e7ff;
+  --input: #c7d2fe; /* derived: one step darker than border for 3:1 input boundary */
+  --ring: #6366f1;
+  --success: #059669;
+  --success-foreground: #000000;
+  --warning: #d97706;
+  --warning-foreground: #000000;
+  --chart-1: #6366f1;
+  --chart-2: #818cf8;
+  --chart-3: #059669;
+  --chart-4: #d97706;
+  --chart-5: #dc2626;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #312e81;
+  --sidebar-primary: #6366f1;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #e0e7ff;
+  --sidebar-accent-foreground: #312e81;
+  --sidebar-border: #e0e7ff;
+  --sidebar-ring: #6366f1;
+}
+
+.dark {
+  --background: #0f172a;
+  --foreground: #ffffff;
+  --card: #192134;
+  --card-foreground: #ffffff;
+  --popover: #192134;
+  --popover-foreground: #ffffff;
+  --primary: #6366f1;
+  --primary-foreground: #000000;
+  --secondary: #4338ca;
+  --secondary-foreground: #ffffff;
+  --muted: #151d39;
+  --muted-foreground: #94a3b8;
+  --accent: rgba(99, 102, 241, 0.16); /* derived: primary tint for hover surfaces */
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.18); /* derived: visible input boundary */
+  --ring: #6366f1;
+  --success: #059669;
+  --success-foreground: #000000;
+  --warning: #d97706;
+  --warning-foreground: #000000;
+  --chart-1: #6366f1;
+  --chart-2: #818cf8;
+  --chart-3: #059669;
+  --chart-4: #d97706;
+  --chart-5: #dc2626;
+  --sidebar: #192134;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #6366f1;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: rgba(99, 102, 241, 0.16);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-ring: #6366f1;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  /* Tailwind v4 dropped the pointer cursor on buttons; MASTER.md's checklist wants it back. */
+  :where(button, [role="button"], [role="tab"], [role="radio"]):not(:disabled, [aria-disabled="true"]) {
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

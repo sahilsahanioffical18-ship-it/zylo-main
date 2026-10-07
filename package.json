@@ -1,0 +1,12 @@
+{
+  "name": "zylo",
+  "private": true,
+  "scripts": {
+    "db:up": "docker compose up -d --wait db redis",
+    "db:down": "docker compose down",
+    "livekit": "livekit-server --dev --config livekit.dev.yaml",
+    "dev:server": "npm --prefix server run dev",
+    "dev:web": "npm --prefix web run dev",
+    "dev": "npm run dev:server & npm run dev:web"
+  }
+}

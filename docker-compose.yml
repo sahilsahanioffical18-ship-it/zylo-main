@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: zylo
+      POSTGRES_PASSWORD: zylo
+      POSTGRES_DB: zylo
+    ports:
+      - "5432:5432"
+    volumes:
+      - zylo-db:/var/lib/postgresql/data
+      - ./server/db/create-test-db.sql:/docker-entrypoint-initdb.d/01-create-test-db.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U zylo -d zylo"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    # Only keys with a TTL (cache entries, rate buckets) may be evicted under
+    # memory pressure; room state (Phase 7b) has no TTL, so it is never evicted.
+    command: ["redis-server", "--maxmemory", "256mb", "--maxmemory-policy", "volatile-lru", "--save", "", "--appendonly", "no"]
+    ports:
+      - "127.0.0.1:6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  zylo-db:

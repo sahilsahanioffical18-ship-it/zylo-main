@@ -1,0 +1,9 @@
+# Local development only, used by `npm run livekit` together with --dev.
+# --dev supplies the devkey/secret pair; api_key must name a key LiveKit runs
+# with, because LiveKit signs every webhook with that key's secret — which is how
+# server/lib/webhook.js knows a call is really from LiveKit.
+# The URL is the API server (PORT=4000 in server/.env).
+webhook:
+  api_key: devkey
+  urls:
+    - http://127.0.0.1:4000/livekit/webhook
