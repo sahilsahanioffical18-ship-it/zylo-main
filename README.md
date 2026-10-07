@@ -2,6 +2,8 @@
 
 > **Host-controlled video meeting platform with real-time media, AI room intelligence, and live multilingual translation.**
 
+🌐 **Live Application:** [https://zylo-web-two.vercel.app](https://zylo-web-two.vercel.app)
+
 Zylo is an enterprise-ready video collaboration platform engineered for high performance, strict host moderation, and intelligent meeting assistance. Built with Next.js, Express, LiveKit SFU, Redis, and PostgreSQL, Zylo scales effortlessly to group video calls with shared streaming AI and sub-second multilingual speech translation.
 
 ---
@@ -169,6 +171,7 @@ See [`LOAD_TEST_RESULTS.md`](LOAD_TEST_RESULTS.md) for benchmark metrics on memo
 
 Zylo is designed to deploy entirely on free or managed cloud tiers:
 
+- **Live Application**: [https://zylo-web-two.vercel.app](https://zylo-web-two.vercel.app)
 - **Frontend**: [Vercel](https://vercel.com) (Root directory: `web`)
 - **Backend API**: [Railway](https://railway.com) or [Render](https://render.com) (Root directory: `server`)
 - **Media SFU**: [LiveKit Cloud](https://cloud.livekit.io) (Free 50 GB/mo tier)
