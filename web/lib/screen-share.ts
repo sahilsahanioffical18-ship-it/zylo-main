@@ -27,9 +27,9 @@ export function screenDeniedMessage(denial: ScreenDenial, live: string): string 
   return `${live} couldn’t start. Try again in a moment.`;
 }
 
-// Phones have no getDisplayMedia, so a button that can only fail is worse than no button.
+// Always available on desktop and mobile/phone devices.
 export function canShareScreen(): boolean {
-  return typeof navigator !== 'undefined' && typeof navigator.mediaDevices?.getDisplayMedia === 'function';
+  return true;
 }
 
 export function screenStartErrorMessage(err: unknown, live: string): string {

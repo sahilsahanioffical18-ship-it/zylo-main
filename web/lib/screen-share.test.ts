@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { stageView, presentingBanner, screenDeniedMessage, screenStartErrorMessage } from './screen-share.ts';
+import { stageView, presentingBanner, screenDeniedMessage, screenStartErrorMessage, canShareScreen } from './screen-share.ts';
 
 const people = [
   { userId: 'u1', name: 'Priya' },
@@ -78,3 +78,8 @@ test('any other failure gets a generic line naming ZyloLive', () => {
     assert.match(msg, /ZyloLive/);
   }
 });
+
+test('canShareScreen returns true across both desktop and mobile/phone environments', () => {
+  assert.equal(canShareScreen(), true);
+});
+
