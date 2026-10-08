@@ -65,10 +65,10 @@ test('a closed or blocked picker points at the system permission', () => {
 
 test('a browser without screen capture is told so', () => {
   const deviceUnsupported = Object.assign(new Error('x'), { name: 'DeviceUnsupportedError' });
-  assert.match(screenStartErrorMessage(deviceUnsupported, 'ZyloLive'), /available in this browser/);
+  assert.match(screenStartErrorMessage(deviceUnsupported, 'ZyloLive'), /not supported on mobile browsers/);
 
   const notSupported = new DOMException('x', 'NotSupportedError');
-  assert.match(screenStartErrorMessage(notSupported, 'ZyloLive'), /available in this browser/);
+  assert.match(screenStartErrorMessage(notSupported, 'ZyloLive'), /not supported on mobile browsers/);
 });
 
 test('any other failure gets a generic line naming ZyloLive', () => {

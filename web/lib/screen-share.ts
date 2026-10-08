@@ -39,7 +39,9 @@ export function screenStartErrorMessage(err: unknown, live: string): string {
   if (name === 'NotAllowedError') {
     return `${live} didn’t start. If you picked a screen, allow screen recording for your browser in your system settings.`;
   }
-  // livekit-client throws DeviceUnsupportedError where getDisplayMedia is missing (phones).
-  if (name === 'DeviceUnsupportedError' || name === 'NotSupportedError') return `${live} isn’t available in this browser.`;
+  // livekit-client throws DeviceUnsupportedError where getDisplayMedia is missing (mobile browsers).
+  if (name === 'DeviceUnsupportedError' || name === 'NotSupportedError') {
+    return `${live} screen sharing is not supported on mobile browsers. Please join from a desktop or laptop to share your screen.`;
+  }
   return `${live} couldn’t share your screen. Try again.`;
 }
