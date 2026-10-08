@@ -420,12 +420,22 @@ export function useLiveKitRoom(meetingId: string | null, prefs: MediaPrefs, shar
       let tracks;
       try {
         tracks = await room.localParticipant.createScreenTracks({ audio: true });
-      } catch (err) {
-        // Cancelled picker, OS refusal, unsupported browser. Nothing was published;
-        // livekit-client has already stopped anything it captured.
-        toast.error(screenStartErrorMessage(err, brand.live));
-        shareRef.current.onEnded();
-        return;
+      } catch (firstErr) {
+        // If audio capture is unsupported (common on mobile browsers),
+        // attempt video-only capture unless the user explicitly cancelled the picker.
+        const isUserCancel = firstErr instanceof Error && firstErr.name === 'NotAllowedError';
+        if (!isUserCancel) {
+          try {
+            tracks = await room.localParticipant.createScreenTracks({ audio: false });
+          } catch {
+            // Keep original error for toast if fallback also fails
+          }
+        }
+        if (!tracks) {
+          toast.error(screenStartErrorMessage(firstErr, brand.live));
+          shareRef.current.onEnded();
+          return;
+        }
       }
       // The room was torn down or the lock was lost while the picker was open (kick,
       // End for all, a second tab, host stop, policy switch): stop the capture

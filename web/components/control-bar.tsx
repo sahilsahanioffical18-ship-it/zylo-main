@@ -83,8 +83,8 @@ export function ControlBar({
       />
 
       {/* Enabled whoever is presenting and whatever the policy: the server answers
-          with the spec's toasts (busy / host_only / unavailable). Hidden entirely on
-          phones: canShareScreen() is false wherever getDisplayMedia doesn't exist. */}
+          with the spec's toasts (busy / host_only / unavailable). Available on both
+          laptop and mobile/phone devices. */}
       {canShareScreen() && (
         <Tooltip>
           <TooltipTrigger asChild>
